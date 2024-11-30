@@ -7,7 +7,7 @@ import asyncio
 from utils.logging_config import setup_logging
 from utils.pdf_processing import extract_text
 from utils.text_segmentation import segment_text
-from utils.openai_api import improve_text_gpt
+from utils.openai_api import improve_text_gpt, improve_full_text_gpt
 
 # Setup logging
 setup_logging()
@@ -34,7 +34,7 @@ async def process_pdf_endpoint(
         text = await extract_text(pdf_content)
 
         if not text:
-            return{"error": "Failed to extract text from the PDF file."}
+            return {"error": "Failed to extract text from the PDF file."}
         
         # Segment extracted text into chunks for individual processing
         chunks = segment_text(text)
@@ -44,14 +44,17 @@ async def process_pdf_endpoint(
         improved_chunks = await asyncio.gather(*tasks)
         improved_text = '\n\n'.join(improved_chunks)
 
-        result = f"**Improved text:**\n\n{improved_text}"
+        # Further improve the entire text using the new function
+        improved_full_text = await improve_full_text_gpt(improved_text)
 
-        logging.info("PDF processing completed succesfully.")
+        result = f"**Improved text:**\n\n{improved_full_text}"
+
+        logging.info("PDF processing completed successfully.")
         return {"result": result}
     
     except Exception as e:
-        logging.error(f"An error ocurred during PDF processing: {e}")
-        raise HTTPException(status_code=500, detail="An unexpected error ocurred during processing.")
+        logging.error(f"An error occurred during PDF processing: {e}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred during processing.")
     
 def gradio_interface(pdf_file):
     """
