@@ -16,7 +16,7 @@ setup_logging()
 app = FastAPI()
 
 @app.get("/")
-async def root():
+async def read_root():
     return {"message": "Welcome to the Technical Document Enhancer API"}
 
 @app.post("/process_pdf/")
@@ -82,6 +82,7 @@ def gradio_interface(pdf_file):
         return response['error']
     else:
         return response['result']
+    
     
 iface = gr.Interface(
     fn=gradio_interface,
