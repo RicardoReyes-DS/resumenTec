@@ -15,6 +15,10 @@ setup_logging()
 # Initialize FastAPI app
 app = FastAPI()
 
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Technical Document Enhancer API"}
+
 @app.post("/process_pdf/")
 async def process_pdf_endpoint(
     pdf_content: bytes,
@@ -87,5 +91,8 @@ iface = gr.Interface(
     description="Improve technical documents with AI."
 )
 
+iface.launch()
+
 if __name__ == "__main__":
-    iface.launch(share=False)
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8080)
