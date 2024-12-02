@@ -100,10 +100,6 @@ async def improve_full_text_gpt(
         full_text (str): The complete text to be improved.
         model (str): The model to be used for text improvement, 
                      defaults to 'o1-mini'.
-        temperature (float): The temperature parameter to control creativity,
-                             defaults to 0.7.
-        max_completion_tokens (int): The maximum number of tokens in the response, 
-                          defaults to 65536.
     """
     try:
         logging.info(f"Sending requests to OpenAI API to improve the full text with model: {model}")
