@@ -88,12 +88,11 @@ def gradio_interface(pdf_file):
 if __name__ == "__main__":
     iface = gr.Interface(
     fn=gradio_interface,
-    inputs=gr.File(label="Upload your PDF"),
+    inputs=gr.File(label="Upload your PDF or DOCX file."),
     outputs=gr.Markdown(label="Processed Output", show_copy_button=True),
     title="Technical Document Enhancer",
-    description="Improve technical documents with AI."
+    description="Improve technical documents with AI.",
+    show_progress="full"
     )
 
-    iface.launch(share=True, server_name="0.0.0.0", server_port=8080)
-
-
+    iface.launch(share=True, server_name="127.0.0.1", server_port=7860)
