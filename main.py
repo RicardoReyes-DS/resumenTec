@@ -82,18 +82,18 @@ def gradio_interface(pdf_file):
         return response['error']
     else:
         return response['result']
-    
-    
-iface = gr.Interface(
+
+
+
+if __name__ == "__main__":
+    iface = gr.Interface(
     fn=gradio_interface,
     inputs=gr.File(label="Upload your PDF"),
     outputs=gr.Markdown(label="Processed Output", show_copy_button=True),
     title="Technical Document Enhancer",
     description="Improve technical documents with AI."
-)
+    )
 
-iface.launch()
+    iface.launch(share=True, server_name="0.0.0.0", server_port=8080)
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8080)
+

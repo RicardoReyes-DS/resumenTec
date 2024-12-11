@@ -38,10 +38,6 @@ uvicorn main:app --host 0.0.0.0 --port 8080
 
 Contributions are welcome! Please ensure that your code adheres to the project's coding standards and includes appropriate tests.
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
 ## Contact
 
 For any inquiries or support, please contact the development team at [reyes.valdes.ricardo@gmail.com].
